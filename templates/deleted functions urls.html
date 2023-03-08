@@ -1,0 +1,20 @@
+def view_creditcard_details(request):
+    a = CreditCard.objects.all()
+    print(a)
+    return render(request, 'customer/view_creditcard_details.html', {'a': a})
+
+add credit card details for online payment
+create models and form for credit card
+def creditcard_pay_cus(request):
+    form = Creditcard_form()
+    if request.method == 'POST':
+        form = Creditcard_form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_creditcard_details')
+    return render(request, 'customer/creditcard_add.html', {'form': form})
+
+ # path("creditcard_pay_cus", views.creditcard_pay_cus, name="creditcard_pay_cus"),
+ # path("view_creditcard_details", views.view_creditcard_details, name="view_creditcard_details"),
+ # path("direct_appoinment_confirmed/<int:id>/", views.direct_appoinment_confirmed, name="direct_appoinment_confirmed"),
+
